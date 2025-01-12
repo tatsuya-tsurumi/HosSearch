@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+    <title>病院一覧</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <p>ユーザID:<span th:text="${session.userId}"></span></p>
+    <hr>
+    <h1>病院一覧</h1>
+    <hr>
+
+    <!-- 検索フォーム -->
+    <form action="/search-hospitals" method="get" class="search_form">
+        <input type="text" name="keyword" placeholder="病院名を検索">
+        <button type="submit">検索</button>
+    </form>
+    <br>
+
+    <!-- 病院情報の一覧 -->
+    <table>
+        <thead>
+            <tr>
+                <th>病院ID</th>
+                <th>病院名</th>
+                <th>住所</th>
+                <th>ホームページ</th>
+                <th>詳細</th>
+                <th>写真</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 病院情報を繰り返し表示 -->
+            <tr th:each="hosLists : ${session.hosList}">
+                <td th:text="${hosLists.hospital_id}">病院ID</td>
+                <td th:text="${hosLists.hospital_name}">病院名</td>
+                <td th:text="${hosLists.address}">住所</td>
+                <td>
+                    <a th:href="${hosLists.url}" target="_blank">ホームページ</a>
+                </td>
+                <td>
+                    <a th:href="'/hospital-details/' + ${hosLists.hospital_id}">詳細を見る</a>
+                </td>
+                <td th:text="${hosLists.hospital_img}">写真</td>
+            </tr>
+            <!-- 病院がない場合のメッセージ -->
+            <tr th:if="${#lists.isEmpty(session.hosList)}">
+                <td colspan="4">病院情報が見つかりません。</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

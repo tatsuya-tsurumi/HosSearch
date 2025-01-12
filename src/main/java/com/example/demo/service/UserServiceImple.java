@@ -2,11 +2,14 @@ package com.example.demo.service;
 
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Hospital;
 import com.example.demo.entity.User;
 import com.example.demo.form.LoginForm;
+import com.example.demo.repository.HospitalRepository;
 import com.example.demo.repository.UserRepository;
 
 import jakarta.servlet.http.HttpSession;
@@ -16,7 +19,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserServiceImple implements UserService {
 	
-	private final UserRepository repository;
+	private final UserRepository usertRepository;
+	private final HospitalRepository hospitalRepository;
 	private final HttpSession session;
 
 	@Override
@@ -24,7 +28,7 @@ public class UserServiceImple implements UserService {
 		// インフラ層へ処理を依頼
 		boolean result = false;
 		
-		User user = repository.selectUser(form);
+		User user = usertRepository.selectUser(form);
 		
 		try {
 			result = checkPassowrd(form.getPassword(), user.getPassword());
@@ -34,8 +38,11 @@ public class UserServiceImple implements UserService {
 		}
 		
 		if(result) {
+			List<Hospital> hosList = hospitalRepository.selectHospitalAll();
 			String userId = user.getUserId();
-			session.setAttribute("user", userId);
+			session.setAttribute("hosList", hosList);
+			session.setAttribute("userId", userId);
+			
 		}
 		
 		return result;
