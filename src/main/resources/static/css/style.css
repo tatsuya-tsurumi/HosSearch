@@ -3,7 +3,7 @@
 body {
 	font-family: Arial, sans-serif;
 	background-color: #f4f4f9;
-	
+
 }
 
 .login_body {
@@ -100,4 +100,46 @@ th {
 
 tr:hover {
 	background-color: #f1f1f1;
+}
+
+.hos_search_detail_btn {
+	background: none;
+	color: blue;
+	text-decoration: underline;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	font-size: 16px;
+}
+
+.hospital-detail {
+	border: 1px solid #ddd;
+	padding: 20px;
+	border-radius: 8px;
+	max-width: 600px;
+	margin: auto;
+}
+
+.hospital-detail h1 {
+	font-size: 24px;
+	margin-bottom: 10px;
+}
+
+.hospital-detail p {
+	margin: 5px 0;
+}
+
+.back-button {
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	text-decoration: none;
+	background-color: #007BFF;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+}
+
+.back-button:hover {
+	background-color: #0056b3;
 }
