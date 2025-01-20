@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-    <title>病院一覧</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
-</head>
-<body>
-    <p>ユーザID:<span th:text="${session.userId}"></span></p>
-    <hr>
+
+	<div th:insert="~{header}"></div>
+
     <h1>病院一覧</h1>
     <hr>
 
@@ -16,9 +9,11 @@
         <input type="text" name="hospitalName" placeholder="病院名を検索">
         <input type="submit" value="検索">
     </form>
-     <form th:action="@{/search-all-hospital}" method="get" class="search_form">
+    <div  th:if="${#lists.isEmpty(session.hosList)}">		
+    <form th:action="@{/search-all-hospital}" method="get" class="search_form">
         <input type="submit" value="病院一覧へ">
     </form>
+	</div>
     <br>
 
     <!-- 病院情報の一覧 -->
